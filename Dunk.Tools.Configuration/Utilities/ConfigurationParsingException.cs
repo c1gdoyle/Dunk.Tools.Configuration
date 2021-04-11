@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace Dunk.Tools.Configuration.Utilities
 {
@@ -7,7 +8,7 @@ namespace Dunk.Tools.Configuration.Utilities
     /// to indicate that can error occurred whilst parsing an AppSetting value.
     /// </summary>
     [Serializable]
-    public sealed class ConfigurationParsingException : Exception
+    public class ConfigurationParsingException : Exception
     {
         /// <summary>
         /// Initialises a new instance of the <see cref="ConfigurationParsingException"/> class with a specified
@@ -27,6 +28,11 @@ namespace Dunk.Tools.Configuration.Utilities
         /// <param name="innerException">The exception that is the cause of the current exception.</param>
         public ConfigurationParsingException(string message, Exception innerException)
             : base(message, innerException)
+        {
+        }
+
+        protected ConfigurationParsingException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }
