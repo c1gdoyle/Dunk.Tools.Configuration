@@ -8,3 +8,4 @@ coverage/*
 packages/*
 TestResult.xml
 results.xml
+*/coverage.opencover.xml

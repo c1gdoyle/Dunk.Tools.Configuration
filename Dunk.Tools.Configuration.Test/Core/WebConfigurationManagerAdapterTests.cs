@@ -10,11 +10,11 @@ namespace Dunk.Tools.Configuration.Test.Core
     [TestFixture]
     public class WebConfigurationManagerAdapterTests
     {
-        private const string EmptyConfigFile = "..\\..\\TestConfigs\\EmptyApp.config";
-        private const string EmptySectionConfigFile = "..\\..\\TestConfigs\\EmptySectionsApp.config";
-        private const string SingleValueAppConfigFile = "..\\..\\TestConfigs\\SingleValueApp.config";
-        private const string CustomSectionAppConfigFile = "..\\..\\TestConfigs\\CustomSectionApp.config";
-        private const string ValuesForGivenTypeAppConfigFile = "..\\..\\TestConfigs\\ValuesForGivenTypeApp.config";
+        private const string EmptyConfigFile = "TestConfigs\\EmptyApp.config";
+        private const string EmptySectionConfigFile = "TestConfigs\\EmptySectionsApp.config";
+        private const string SingleValueAppConfigFile = "TestConfigs\\SingleValueApp.config";
+        private const string CustomSectionAppConfigFile = "TestConfigs\\CustomSectionApp.config";
+        private const string ValuesForGivenTypeAppConfigFile = "TestConfigs\\ValuesForGivenTypeApp.config";
 
 
         [Test]
