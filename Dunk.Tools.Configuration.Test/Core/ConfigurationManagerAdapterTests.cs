@@ -181,6 +181,26 @@ namespace Dunk.Tools.Configuration.Test.Core
         }
 
         [Test]
+        public void ConfigManagerThrowsSerialisableExceptionIfAppSettingValueCannotBeConvertedToType()
+        {
+            const string testKey = "int value";
+            ConfigurationParsingException error = null;
+
+            ConfigurationFileLoader.LoadConfigurationFile(ValuesForGivenTypeAppConfigFile);
+            var configManager = new ConfigurationManagerAdapter();
+
+            try
+            {
+                configManager.GetAppSettingsAsType<DateTime>(testKey);
+            }
+            catch(ConfigurationParsingException ex)
+            {
+                error = TestSerialisationHelper.SerialiseAndDeserialiseException(ex);
+            }
+            Assert.IsNotNull(error);
+        }
+
+        [Test]
         public void ConfigManagerReturnsDefaultValueTypeIfAppSettingKeyIsNotPresentInConfig()
         {
             const string invalidTestKey = "foo bar key";
@@ -230,6 +250,24 @@ namespace Dunk.Tools.Configuration.Test.Core
             var result = configManager.GetAppSettingsAsTypeOrDefault<bool>(invalidTestKey, () => true);
 
             Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void ConfigurationManagerGetAppSettingsAsTypeOrDefaultThrowsIfKeyIsNull()
+        {
+            ConfigurationFileLoader.LoadConfigurationFile(ValuesForGivenTypeAppConfigFile);
+            var configManager = new ConfigurationManagerAdapter();
+
+            Assert.Throws<ArgumentNullException>(() => configManager.GetAppSettingsAsTypeOrDefault<bool>(null));
+        }
+
+        [Test]
+        public void ConfigurationManagerGetAppSettingsAsTypeOrDefaultThrowsIfKeyIsEmpty()
+        {
+            ConfigurationFileLoader.LoadConfigurationFile(ValuesForGivenTypeAppConfigFile);
+            var configManager = new ConfigurationManagerAdapter();
+
+            Assert.Throws<ArgumentNullException>(() => configManager.GetAppSettingsAsTypeOrDefault<bool>(string.Empty));
         }
     }
 }

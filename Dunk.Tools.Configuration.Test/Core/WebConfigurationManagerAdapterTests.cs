@@ -16,7 +16,6 @@ namespace Dunk.Tools.Configuration.Test.Core
         private const string CustomSectionAppConfigFile = "TestConfigs\\CustomSectionApp.config";
         private const string ValuesForGivenTypeAppConfigFile = "TestConfigs\\ValuesForGivenTypeApp.config";
 
-
         [Test]
         public void WebConfigManagerReturnsNoAppSettingsForEmptyConfig()
         {
@@ -181,6 +180,26 @@ namespace Dunk.Tools.Configuration.Test.Core
         }
 
         [Test]
+        public void WebConfigManagerThrowsSerialisableExceptionIfAppSettingValueCannotBeConvertedToType()
+        {
+            const string testKey = "int value";
+            ConfigurationParsingException error = null;
+
+            ConfigurationFileLoader.LoadConfigurationFile(ValuesForGivenTypeAppConfigFile);
+            var configManager = new WebConfigurationManagerAdapter();
+
+            try
+            {
+                configManager.GetAppSettingsAsType<DateTime>(testKey);
+            }
+            catch (ConfigurationParsingException ex)
+            {
+                error = TestSerialisationHelper.SerialiseAndDeserialiseException(ex);
+            }
+            Assert.IsNotNull(error);
+        }
+
+        [Test]
         public void WebConfigManagerReturnsDefaultValueTypeIfAppSettingKeyIsNotPresentInConfig()
         {
             const string invalidTestKey = "foo bar key";
@@ -230,6 +249,24 @@ namespace Dunk.Tools.Configuration.Test.Core
             var result = configManager.GetAppSettingsAsTypeOrDefault<bool>(invalidTestKey, () => true);
 
             Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void WebConfigurationManagerGetAppSettingsAsTypeOrDefaultThrowsIfKeyIsNull()
+        {
+            ConfigurationFileLoader.LoadConfigurationFile(ValuesForGivenTypeAppConfigFile);
+            var configManager = new WebConfigurationManagerAdapter();
+
+            Assert.Throws<ArgumentNullException>(() => configManager.GetAppSettingsAsTypeOrDefault<bool>(null));
+        }
+
+        [Test]
+        public void WebConfigurationManagerGetAppSettingsAsTypeOrDefaultThrowsIfKeyIsEmpty()
+        {
+            ConfigurationFileLoader.LoadConfigurationFile(ValuesForGivenTypeAppConfigFile);
+            var configManager = new WebConfigurationManagerAdapter();
+
+            Assert.Throws<ArgumentNullException>(() => configManager.GetAppSettingsAsTypeOrDefault<bool>(string.Empty));
         }
     }
 }
