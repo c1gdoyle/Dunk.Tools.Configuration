@@ -6,6 +6,12 @@ variables:
   buildId: "1$(Build.BuildId)"
 
 steps:
+# Ensure Java version 11 installed
+- task: JavaToolInstaller@0
+  inputs:
+    versionSpec: '11'
+    jdkArchitectureOption: 'x64'
+    jdkSourceOption: 'PreInstalled'
 # Print buildId
 - script: |
     echo "BuildId = $(buildId)"
