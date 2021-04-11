@@ -8,7 +8,7 @@ namespace Dunk.Tools.Configuration.Test.Extensions
     [TestFixture]
     public class ConfigManagerExtensionsTests
     {
-        private const string ValuesForGivenTypeAppConfigFile = "..\\..\\TestConfigs\\ValuesForGivenTypeApp.config";
+        private const string ValuesForGivenTypeAppConfigFile = "TestConfigs\\ValuesForGivenTypeApp.config";
 
         [Test]
         public void ConfigManagerReturnsShortValue()

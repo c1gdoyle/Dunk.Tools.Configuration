@@ -1,18 +1,22 @@
 ﻿Param
 (
-    [Parameter(Mandatory=$True,Position=1)]
+    [Parameter(Mandatory=$True, Position=1)]
     [string] $TargetAssembly,
 
-    [Parameter(Mandatory=$True,Position=2)]
-    [string] $TargetTestAssembly
+	[Parameter(Mandatory=$True, Position=2)]
+	[string] $TargetTestProj,
+
+	[Parameter(Mandatory=$True, Position=3)]
+	[string] $BuildConfiguration
 )
 
-$openCoverExe = ".\packages\OpenCover.4.7.922\tools\OpenCover.Console.exe"
-$nUnitRunnerExe = ".\packages\NUnit.ConsoleRunner.3.12.0\tools\nunit3-console.exe"
-$reportGeneratorExe = ".\packages\ReportGenerator.4.8.7\tools\net47\ReportGenerator.exe"
+$nugetPackagesPath = "C:\Users\$($env:USERNAME)\.nuget\packages"
+
+$openCover = "$($nugetPackagesPath)\opencover\4.7.922\tools\OpenCover.Console.exe"
+$reportGenerator = "$($nugetPackagesPath)\reportgenerator\4.8.1\tools\net47\ReportGenerator.exe"
 
 ## OpenCover to consume results of executing tests
-&$openCoverExe -target:$nUnitRunnerExe ("-targetargs:{0}" -f $TargetTestAssembly) -register:user -filter:+[$TargetAssembly]*-[*Test]*
+&$openCover -target:'C:\Program Files\dotnet\dotnet.exe' -targetargs:"test $TargetTestProj --no-build --no-restore -p:Configuration=$BuildConfiguration" -output:Coverage.xml -register:user -oldStyle -filter:"+[$TargetAssembly]*"
 
-## Generate Test Coverage report from OpenCover result XML file
-&$reportGeneratorExe -reports:results.xml -targetdir:coverage
+## Generate Test Coverage report from OpenCover coverage.xml file
+&$reportGenerator -reports:Coverage.xml -targetdir:CodeCoverage

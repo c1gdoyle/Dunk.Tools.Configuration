@@ -10,8 +10,8 @@ namespace Dunk.Tools.Configuration.Test.Extensions
     [TestFixture]
     public class ConfigurationElementExtensionsTests
     {
-        private const string CustomSectionAppConfigFile = "..\\..\\TestConfigs\\CustomSectionApp.config";
-        private const string CustomConfigCollectionAppConfigFile = "..\\..\\TestConfigs\\CustomConfigCollectionApp.config";
+        private const string CustomSectionAppConfigFile = "TestConfigs\\CustomSectionApp.config";
+        private const string CustomConfigCollectionAppConfigFile = "TestConfigs\\CustomConfigCollectionApp.config";
 
         private const string TestConfigElementXml =
             "<testSection global=\"true\">\r\n" +
