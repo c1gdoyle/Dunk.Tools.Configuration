@@ -29,7 +29,7 @@ namespace Dunk.Tools.Configuration.Test.ConfigStubs
             }
             set
             {
-                TestUrlsCollection urlsCollection = value;
+                this["urls"] = value;
             }
         }
     }
