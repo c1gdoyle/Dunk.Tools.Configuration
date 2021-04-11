@@ -4,8 +4,4 @@
 *.vs/*
 coverage.xml
 CodeCoverage/*
-coverage/*
-packages/*
-TestResult.xml
-results.xml
 */coverage.opencover.xml
