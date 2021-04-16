@@ -75,6 +75,7 @@ namespace Dunk.Tools.Configuration.Utilities
         /// If able to return as the type then the converted value; otherwise <paramref name="defaultValue"/>.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="key"/> was null or empty.</exception>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("csharpsquid", "CA1031: Suppress exceptions and just return default value")]
         internal static T AsTypeOrDefault<T>(NameValueCollection settings, string key, T defaultValue)
         {
             if (string.IsNullOrEmpty(key))

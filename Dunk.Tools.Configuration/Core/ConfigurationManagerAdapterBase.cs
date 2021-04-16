@@ -40,6 +40,11 @@ namespace Dunk.Tools.Configuration.Core
         /// <inheritdoc />
         public T GetAppSettingsAsTypeOrDefault<T>(string key, Func<T> defaultFactory)
         {
+            if(defaultFactory == null)
+            {
+                throw new ArgumentNullException(nameof(defaultFactory),
+                    $"Unable to retrieve app-setting or default, {nameof(defaultFactory)} parameter cannot be null.");
+            }
             return Utilities.GetAppSettingsHelper.AsTypeOrDefault(AppSettings, key, defaultFactory());
         }
     }

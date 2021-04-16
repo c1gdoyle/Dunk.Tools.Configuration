@@ -268,5 +268,14 @@ namespace Dunk.Tools.Configuration.Test.Core
 
             Assert.Throws<ArgumentNullException>(() => configManager.GetAppSettingsAsTypeOrDefault<bool>(string.Empty));
         }
+
+        [Test]
+        public void WebConfigurationManagerGetAppSettingsAsTypeOfDefaultThrowsIfDefaultFactoryIsNull()
+        {
+            ConfigurationFileLoader.LoadConfigurationFile(ValuesForGivenTypeAppConfigFile);
+            var configManager = new WebConfigurationManagerAdapter();
+
+            Assert.Throws<ArgumentNullException>(() => configManager.GetAppSettingsAsTypeOrDefault<bool>("Test_Key", null as Func<bool>));
+        }
     }
 }

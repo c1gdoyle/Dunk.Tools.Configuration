@@ -1,4 +1,5 @@
-﻿using Dunk.Tools.Configuration.Core;
+﻿using System;
+using Dunk.Tools.Configuration.Core;
 using Dunk.Tools.Configuration.Extensions;
 using Dunk.Tools.Configuration.Test.TestUtilities;
 using NUnit.Framework;
@@ -38,6 +39,22 @@ namespace Dunk.Tools.Configuration.Test.Extensions
         }
 
         [Test]
+        public void ConfigManagerGetAppSettingsAsShortThrowsIfConfigManagerIsNull()
+        {
+            ConfigurationManagerAdapter configurationManager = null;
+
+            Assert.Throws<ArgumentNullException>(() => configurationManager.GetAppSettingsAsInt16("Test_Key"));
+        }
+
+        [Test]
+        public void ConfigManagerGetAppSettingsAsShortOrDefaultThrowsIfConfigManagerIsNull()
+        {
+            ConfigurationManagerAdapter configurationManager = null;
+
+            Assert.Throws<ArgumentNullException>(() => configurationManager.GetAppSettingsAsInt16OrDefault("Test_Key"));
+        }
+
+        [Test]
         public void ConfigManagerReturnsIntValue()
         {
             const string testKey = "int value";
@@ -62,6 +79,22 @@ namespace Dunk.Tools.Configuration.Test.Extensions
             int value = configManager.GetAppSettingsAsInt32OrDefault(testKey);
 
             Assert.AreEqual(default(int), value);
+        }
+
+        [Test]
+        public void ConfigManagerGetAppSettingsAsIntThrowsIfConfigManagerIsNull()
+        {
+            ConfigurationManagerAdapter configurationManager = null;
+
+            Assert.Throws<ArgumentNullException>(() => configurationManager.GetAppSettingsAsInt32("Test_Key"));
+        }
+
+        [Test]
+        public void ConfigManagerGetAppSettingsAsIntOrDefaultThrowsIfConfigManagerIsNull()
+        {
+            ConfigurationManagerAdapter configurationManager = null;
+
+            Assert.Throws<ArgumentNullException>(() => configurationManager.GetAppSettingsAsInt32OrDefault("Test_Key"));
         }
 
         [Test]
@@ -92,6 +125,22 @@ namespace Dunk.Tools.Configuration.Test.Extensions
         }
 
         [Test]
+        public void ConfigManagerGetAppSettingsAsLongThrowsIfConfigManagerIsNull()
+        {
+            ConfigurationManagerAdapter configurationManager = null;
+
+            Assert.Throws<ArgumentNullException>(() => configurationManager.GetAppSettingsAsInt64("Test_Key"));
+        }
+
+        [Test]
+        public void ConfigManagerGetAppSettingsAsLongOrDefaultThrowsIfConfigManagerIsNull()
+        {
+            ConfigurationManagerAdapter configurationManager = null;
+
+            Assert.Throws<ArgumentNullException>(() => configurationManager.GetAppSettingsAsInt64OrDefault("Test_Key"));
+        }
+
+        [Test]
         public void ConfigManagerReturnsDoubleValue()
         {
             const string testKey = "double value";
@@ -116,6 +165,22 @@ namespace Dunk.Tools.Configuration.Test.Extensions
             double value = configManager.GetAppSettingsAsDoubleOrDefault(testKey);
 
             Assert.AreEqual(default(double), value);
+        }
+
+        [Test]
+        public void ConfigManagerGetAppSettingsAsDoubleThrowsIfConfigManagerIsNull()
+        {
+            ConfigurationManagerAdapter configurationManager = null;
+
+            Assert.Throws<ArgumentNullException>(() => configurationManager.GetAppSettingsAsDouble("Test_Key"));
+        }
+
+        [Test]
+        public void ConfigManagerGetAppSettingsAsDoubleOrDefaultThrowsIfConfigManagerIsNull()
+        {
+            ConfigurationManagerAdapter configurationManager = null;
+
+            Assert.Throws<ArgumentNullException>(() => configurationManager.GetAppSettingsAsDoubleOrDefault("Test_Key"));
         }
 
         [Test]
@@ -146,6 +211,22 @@ namespace Dunk.Tools.Configuration.Test.Extensions
         }
 
         [Test]
+        public void ConfigManagerGetAppSettingsAsFloatThrowsIfConfigManagerIsNull()
+        {
+            ConfigurationManagerAdapter configurationManager = null;
+
+            Assert.Throws<ArgumentNullException>(() => configurationManager.GetAppSettingsAsFloat("Test_Key"));
+        }
+
+        [Test]
+        public void ConfigManagerGetAppSettingsAsFloatOrDefaultThrowsIfConfigManagerIsNull()
+        {
+            ConfigurationManagerAdapter configurationManager = null;
+
+            Assert.Throws<ArgumentNullException>(() => configurationManager.GetAppSettingsAsFloatOrDefault("Test_Key"));
+        }
+
+        [Test]
         public void ConfigManagerReturnsBooleanValue()
         {
             const string testKey = "boolean value";
@@ -170,6 +251,22 @@ namespace Dunk.Tools.Configuration.Test.Extensions
             bool value = configManager.GetAppSettingsAsBooleanOrDefault(testKey);
 
             Assert.AreEqual(default(bool), value);
+        }
+
+        [Test]
+        public void ConfigManagerGetAppSettingsAsBooleanThrowsIfConfigManagerIsNull()
+        {
+            ConfigurationManagerAdapter configurationManager = null;
+
+            Assert.Throws<ArgumentNullException>(() => configurationManager.GetAppSettingsAsBoolean("Test_Key"));
+        }
+
+        [Test]
+        public void ConfigManagerGetAppSettingsAsBooleanOrDefaultThrowsIfConfigManagerIsNull()
+        {
+            ConfigurationManagerAdapter configurationManager = null;
+
+            Assert.Throws<ArgumentNullException>(() => configurationManager.GetAppSettingsAsBooleanOrDefault("Test_Key"));
         }
     }
 }

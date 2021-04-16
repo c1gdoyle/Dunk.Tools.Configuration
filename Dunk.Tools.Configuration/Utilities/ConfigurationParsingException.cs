@@ -11,6 +11,13 @@ namespace Dunk.Tools.Configuration.Utilities
     public class ConfigurationParsingException : Exception
     {
         /// <summary>
+        /// Initialises a new default instance of <see cref="ConfigurationParsingException"/>.
+        /// </summary>
+        public ConfigurationParsingException()
+        {
+        }
+
+        /// <summary>
         /// Initialises a new instance of the <see cref="ConfigurationParsingException"/> class with a specified
         /// error message.
         /// </summary>
