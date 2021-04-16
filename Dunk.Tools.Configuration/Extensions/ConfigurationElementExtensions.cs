@@ -20,8 +20,13 @@ namespace Dunk.Tools.Configuration.Extensions
         /// <returns>
         /// A <see cref="XElement"/> containing the details of the <paramref name="configSection"/>.
         /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="configSection"/> was null.</exception>
         public static XElement ToXElement(this ConfigurationSection configSection)
         {
+            if (configSection == null)
+            {
+                throw new ArgumentNullException(nameof(configSection));
+            }
             string xElName = !string.IsNullOrEmpty(configSection.SectionInformation.Name) ?
                 configSection.SectionInformation.Name : configSection.GetType().Name;
 
@@ -39,8 +44,13 @@ namespace Dunk.Tools.Configuration.Extensions
         /// <returns>
         /// A <see cref="XElement"/> containing the details of the <paramref name="configElement"/>.
         /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="configElement"/> was null.</exception>
         public static XElement ToXElement(this ConfigurationElement configElement)
         {
+            if(configElement == null)
+            {
+                throw new ArgumentNullException(nameof(configElement));
+            }
             XElement element = new XElement(configElement.GetType().Name);
 
             ParseElementDetails(element, configElement);

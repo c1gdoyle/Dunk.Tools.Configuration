@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Configuration;
+using System.Linq;
 using Dunk.Tools.Configuration.Core;
 using Dunk.Tools.Configuration.Extensions;
 using Dunk.Tools.Configuration.Test.ConfigStubs;
@@ -28,6 +30,22 @@ namespace Dunk.Tools.Configuration.Test.Extensions
                 "    <url name=\"url4\" url=\"http://www.testurl4.com\" port=\"4044\" />\r\n" +
                 "  </urls>\r\n" +
                 "</testSection>";
+
+        [Test]
+        public void ConfigSectionToXElementThrowsIfConfigSectionIsNull()
+        {
+            TestConfigSection configSection = null;
+
+            Assert.Throws<ArgumentNullException>(() => configSection.ToXElement());
+        }
+
+        [Test]
+        public void ConfigurationElementToXElementThrowsIfConfigurationElementIsNull()
+        {
+            ConfigurationElement configElement = null;
+
+            Assert.Throws<ArgumentNullException>(() => configElement.ToXElement());
+        }
 
         [Test]
         public void ConfigSectionConvertsToXElement()
@@ -143,7 +161,7 @@ namespace Dunk.Tools.Configuration.Test.Extensions
         }
 
         [Test]
-        public void XElementContainsConfigColelctionWithCollectionElements()
+        public void XElementContainsConfigCollectionWithCollectionElements()
         {
             const string testSectionName = "testSection";
 

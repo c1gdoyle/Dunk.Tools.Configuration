@@ -39,7 +39,7 @@ namespace Dunk.Tools.Configuration.Utilities
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("csharpsquid", "S3011: Support access to ConfigurationManager internals")]
-        private void ResetConfigMechanism()
+        private static void ResetConfigMechanism()
         {
             typeof(ConfigurationManager)
                 .GetField("s_initState", BindingFlags.NonPublic | BindingFlags.Static)
