@@ -4,6 +4,7 @@ pool:
 variables:
   buildConfiguration: 'Release'
   buildId: "1$(Build.BuildId)"
+  disable.coverage.autogenerate: 'true'
 
 steps:
 # Ensure Java version 11 installed
@@ -24,6 +25,12 @@ steps:
 # Build source, tests and run tests for net472 (with coverage)
 - script: |
     dotnet test ./Dunk.Tools.Configuration.Test/Dunk.Tools.Configuration.Test.csproj --configuration $(buildConfiguration) --framework net472 --logger:trx /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+# Create Cobertura coverage reports
+- script: |
+    dotnet tool install dotnet-reportgenerator-globaltool --tool-path .
+    .\reportgenerator.exe "-reports:$(Build.SourcesDirectory)/coverage/coverage.opencover.xml" "-targetdir:coverage/Cobertura" "-reporttypes:Cobertura;HTMLInline;HTMLChart"
+  condition: eq( variables['Agent.OS'], 'Windows_NT' )
+  displayName: Run Reportgenerator on Windows
 # End SonarScanner
 - script: |
     %USERPROFILE%\.dotnet\tools\dotnet-sonarscanner end /d:sonar.login="$(SONAR_TOKEN)"
@@ -31,3 +38,9 @@ steps:
   inputs:
     testRunner: VSTest
     testResultsFiles: '**/*.trx'
+    
+- task: PublishCodeCoverageResults@1
+  inputs:
+    summaryFileLocation: $(Build.SourcesDirectory)/coverage/Cobertura/Cobertura.xml
+    reportDirectory: $(Build.SourcesDirectory)/coverage/Cobertura
+    codecoverageTool: cobertura
